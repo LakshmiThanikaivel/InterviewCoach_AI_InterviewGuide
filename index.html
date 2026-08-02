@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Interview Coach</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="app-header">
+    <h1>Interview Coach</h1>
+    <p class="subtitle">Practice questions, answer them, get a real evaluation.</p>
+  </header>
+
+  <main class="layout">
+
+    <!-- Left: setup + question agenda -->
+    <section class="agenda-pane">
+      <form id="topicForm" class="topic-form">
+        <label for="topicInput">What are you preparing for?</label>
+        <input
+          id="topicInput"
+          type="text"
+          placeholder="e.g. Backend engineer, Python &amp; distributed systems"
+          autocomplete="off"
+        />
+        <div class="topic-form-row">
+          <label for="numQuestions" class="count-label">
+            Questions
+            <select id="numQuestions">
+              <option value="3">3</option>
+              <option value="5" selected>5</option>
+              <option value="8">8</option>
+            </select>
+          </label>
+          <button type="submit" id="generateBtn" class="btn-primary">Generate questions</button>
+        </div>
+      </form>
+
+      <div id="agendaStatus" class="agenda-status"></div>
+      <ol id="questionList" class="question-list"></ol>
+    </section>
+
+    <!-- Right: active question + answer + evaluation -->
+    <section class="session-pane">
+      <div id="emptyState" class="empty-state">
+        <p>Enter a role or topic on the left and generate your question set to begin.</p>
+      </div>
+
+      <div id="activeQuestion" class="active-question hidden">
+        <span class="q-eyebrow">Question <span id="qIndex"></span></span>
+        <h2 id="qText"></h2>
+
+        <textarea
+          id="answerInput"
+          placeholder="Type your answer here — as much detail as you'd give in a real interview."
+          rows="7"
+        ></textarea>
+
+        <div class="session-actions">
+          <button id="evaluateBtn" class="btn-primary">Evaluate my answer</button>
+          <span id="evalStatus" class="eval-status"></span>
+        </div>
+
+        <div id="evaluation" class="evaluation hidden">
+          <div class="score-block">
+            <svg id="scoreRing" viewBox="0 0 120 120" class="score-ring">
+              <circle class="ring-track" cx="60" cy="60" r="52"></circle>
+              <circle id="ringProgress" class="ring-progress" cx="60" cy="60" r="52"></circle>
+            </svg>
+            <div class="score-number">
+              <span id="scoreValue">–</span><span class="score-max">/10</span>
+            </div>
+          </div>
+
+          <div class="eval-details">
+            <p id="feedbackText" class="feedback-text"></p>
+
+            <div class="eval-columns">
+              <div>
+                <h3>Strengths</h3>
+                <ul id="strengthsList"></ul>
+              </div>
+              <div>
+                <h3>Improve</h3>
+                <ul id="improvementsList"></ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

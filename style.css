@@ -1,0 +1,338 @@
+:root {
+  --paper: #F2F3EF;
+  --surface: #FFFFFF;
+  --ink: #17242B;
+  --muted: #64748B;
+  --border: #DDE2DC;
+  --teal: #1F6F63;
+  --teal-deep: #14504A;
+  --teal-wash: #E7F0EE;
+  --amber: #E2A63B;
+  --amber-deep: #C98826;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Inter', -apple-system, sans-serif;
+  line-height: 1.5;
+}
+
+/* ---------- Header ---------- */
+.app-header {
+  padding: 30px 32px 22px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.app-header h1 {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 1.8rem;
+  margin: 0 0 4px;
+  color: var(--teal-deep);
+}
+
+.subtitle {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* ---------- Layout ---------- */
+.layout {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 0;
+  min-height: calc(100vh - 96px);
+}
+
+@media (max-width: 860px) {
+  .layout { grid-template-columns: 1fr; }
+}
+
+/* ---------- Agenda pane ---------- */
+.agenda-pane {
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 26px;
+}
+
+.topic-form label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+#topicInput {
+  width: 100%;
+  padding: 11px 13px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+#topicInput:focus {
+  outline: 2px solid var(--teal);
+  outline-offset: 1px;
+}
+
+.topic-form-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 14px;
+  gap: 10px;
+}
+
+.count-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+#numQuestions {
+  font-family: 'IBM Plex Mono', monospace;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 5px 6px;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.btn-primary {
+  background: var(--teal);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  white-space: nowrap;
+}
+
+.btn-primary:hover { background: var(--teal-deep); }
+.btn-primary:disabled { background: var(--border); color: var(--muted); cursor: not-allowed; }
+
+.agenda-status {
+  margin-top: 14px;
+  font-size: 0.85rem;
+  color: var(--muted);
+  min-height: 18px;
+}
+
+.agenda-status.error { color: #B23B3B; }
+
+.question-list {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.question-item {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 11px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.question-item:hover { background: var(--teal-wash); }
+
+.question-item.active {
+  background: var(--teal-wash);
+  border-color: var(--teal);
+}
+
+.question-item .num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--teal-deep);
+  min-width: 18px;
+}
+
+.question-item .qsnippet {
+  font-size: 0.88rem;
+  color: var(--ink);
+}
+
+.question-item.answered .num::after {
+  content: " ✓";
+  color: var(--amber-deep);
+}
+
+/* ---------- Session pane ---------- */
+.session-pane {
+  padding: 40px 44px;
+  max-width: 720px;
+}
+
+.empty-state {
+  color: var(--muted);
+  font-size: 1rem;
+  max-width: 420px;
+  margin-top: 40px;
+}
+
+.hidden { display: none !important; }
+
+.q-eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  color: var(--teal);
+  text-transform: uppercase;
+}
+
+#qText {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 1.5rem;
+  margin: 8px 0 22px;
+  color: var(--ink);
+}
+
+#answerInput {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  color: var(--ink);
+  background: var(--surface);
+  resize: vertical;
+}
+
+#answerInput:focus {
+  outline: 2px solid var(--teal);
+  outline-offset: 1px;
+}
+
+.session-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.eval-status {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.eval-status.error { color: #B23B3B; }
+
+/* ---------- Evaluation report ---------- */
+.evaluation {
+  margin-top: 34px;
+  padding-top: 30px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 30px;
+}
+
+.score-block {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  flex-shrink: 0;
+}
+
+.score-ring {
+  width: 120px;
+  height: 120px;
+  transform: rotate(-90deg);
+}
+
+.ring-track {
+  fill: none;
+  stroke: var(--border);
+  stroke-width: 10;
+}
+
+.ring-progress {
+  fill: none;
+  stroke: var(--amber);
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-dasharray: 326.7;
+  stroke-dashoffset: 326.7;
+  transition: stroke-dashoffset 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.score-number {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'IBM Plex Mono', monospace;
+  color: var(--teal-deep);
+}
+
+#scoreValue {
+  font-size: 2.1rem;
+  font-weight: 500;
+}
+
+.score-max {
+  font-size: 1rem;
+  color: var(--muted);
+  margin-left: 2px;
+}
+
+.eval-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.feedback-text {
+  margin: 0 0 18px;
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+
+.eval-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.eval-columns h3 {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  margin: 0 0 8px;
+}
+
+.eval-columns ul {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 0.88rem;
+}
+
+.eval-columns li { margin-bottom: 5px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ring-progress { transition: none; }
+}
